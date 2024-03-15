@@ -1,33 +1,36 @@
 <!-- app.component.html -->
 <div class="container">
-    <form class="example-form">
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Enter your name">
-      </mat-form-field>
-  
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput placeholder="Enter your email">
-      </mat-form-field>
-  
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Enter your password">
-      </mat-form-field>
-  
-      <mat-form-field>
-        <mat-label>Confirm Password</mat-label>
-        <input matInput type="password" placeholder="Confirm your password">
-      </mat-form-field>
-  
-      <button mat-raised-button color="primary">Submit</button>
+  <div *ngIf="selectedOwner">
+    <p>ID: {{selectedOwner.id}} </p>
+    <p>FirstName: {{selectedOwner.firstName}} </p>
+    <p>FirstName: {{selectedOwner.lastName}} </p>
+    <app-pet-list [pets]="pets"></app-pet-list>
+
+    <form [formGroup]="petForm" (ngSubmit)="onSubmit()">
+      <div formArrayName="pets">
+        <div class="form-group" *ngFor="let petControl of controls; let i = index"   [formGroupName]="i">
+
+
+          <mat-form-field>
+            <mat-label>Pet Name</mat-label>
+            <input matInput placeholder="Enter your pet name" formControlName="name">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Breed</mat-label>
+            <input matInput placeholder="Enter your pet breed" formControlName="breed">
+          </mat-form-field>
+
+          <button type="button" (click)="onDeletePet(i)" > x</button>
+        </div>
+        <button type="button" (click)="onAddPet()"> Add pet</button>
+        <button type="submit"> Save</button>
+      </div>
     </form>
-  
-    <mat-list class="example-list">
-        <a mat-list-item href="#item1">Item 1</a>
-        <a mat-list-item href="#item2">Item 2</a>
-        <a mat-list-item href="#item3">Item 3</a>
-    </mat-list>
   </div>
-  
+  <p>Owner List</p>
+  <mat-list class="example-list" *ngFor="let owner of owners; let i =index">
+    <a mat-list-item (click)="onVewPet(i)">{{owner.firstName +"" + owner.lastName}}</a>
+  </mat-list>
+
+</div>

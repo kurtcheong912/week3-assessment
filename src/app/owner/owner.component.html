@@ -1,0 +1,12 @@
+<form (ngSubmit)="onSubmit()" #ownerForm="ngForm">
+    <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="Enter your first name" ngModel name="firstName" required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Enter your last name" ngModel name="lastName" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!ownerForm.valid">Submit</button>
+</form>

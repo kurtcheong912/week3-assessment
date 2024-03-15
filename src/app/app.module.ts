@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -24,6 +24,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing-module';
 import { PetsComponent } from './pets/pets.component';
 import {MatSelectModule} from '@angular/material/select';
+import { OwnerComponent } from './owner/owner.component';
+import { HttpClientModule } from '@angular/common/http';
+import { OwnerService } from './owner/owner.service';
+import { PetService } from './pets/pet.service';
+import { PetListComponent } from './pets/pet-list/pet-list.component';
+import { PetItemComponent } from './pets/pet-list/pet-item/pet-item.component';
+
+
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
 
@@ -37,7 +45,10 @@ const appRoutes: Routes = [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    PetsComponent
+    PetsComponent,
+    OwnerComponent,
+    PetListComponent,
+    PetItemComponent
   ],
   imports: [
     BrowserModule,
@@ -53,10 +64,12 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(), OwnerService,PetService
   ],
   bootstrap: [AppComponent]
 })
