@@ -1,75 +1,68 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatToolbarModule } from '@angular/material/toolbar';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-// Import Angular Material modules
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { BrowserModule } from '@angular/platform-browser';
+// Angular meterial imports
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core'; 
+import { MatToolbarModule } from '@angular/material/toolbar';
+/////
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
-import { RouterModule, Routes } from '@angular/router';
-import { AppRoutingModule } from './app-routing-module';
 import { PetsComponent } from './pets/pets.component';
-import {MatSelectModule} from '@angular/material/select';
+import { PetListComponent } from './pets/pet-list/pet-list.component';
 import { OwnerComponent } from './owner/owner.component';
+import { OwnerListComponent } from './owner/owner-list/owner-list.component';
+import { OwnerAddComponent } from './owner/owner-add/owner-add.component';
+import { HeaderComponent } from './header/header.component';
+import { PetItemComponent } from './pets/pet-list/pet-item/pet-item.component';
+import { PetEditComponent } from './pets/pet-edit/pet-edit.component';
+import { OwnerItemComponent } from './owner/owner-list/owner-item/owner-item.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PetAddComponent } from './pets/pet-add/pet-add.component';
 import { HttpClientModule } from '@angular/common/http';
 import { OwnerService } from './owner/owner.service';
-import { PetService } from './pets/pet.service';
-import { PetListComponent } from './pets/pet-list/pet-list.component';
-import { PetItemComponent } from './pets/pet-list/pet-item/pet-item.component';
 
 
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-
-
-  // // { path: 'not-found', component: PageNotFoundComponent },
-  // { path: 'not-found', component: ErrorPageComponent , data:{message: 'page not found!!!'}},
-  // { path: '**', redirectTo: '/not-found' }
-];
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    HomeComponent,
     PetsComponent,
-    OwnerComponent,
     PetListComponent,
-    PetItemComponent
+    OwnerComponent,
+    OwnerListComponent,
+    OwnerAddComponent,
+    HeaderComponent,
+    PetItemComponent,
+    PetEditComponent,
+    OwnerItemComponent,
+    PetAddComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     AppRoutingModule,
-    MatSlideToggleModule,
-    MatToolbarModule,
-    MatMenuModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatGridListModule,
+    MatListModule,
+    MatDialogModule,
     MatCardModule,
-    MatSelectModule,
+    MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatListModule,
-    HttpClientModule,
-    ReactiveFormsModule
+    MatSelectModule,
+    MatOptionModule,
+    MatToolbarModule,
   ],
   providers: [
-    provideAnimationsAsync(), OwnerService,PetService
+    provideAnimationsAsync(),OwnerService
   ],
   bootstrap: [AppComponent]
 })

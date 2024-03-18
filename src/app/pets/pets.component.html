@@ -1,36 +1,18 @@
-<!-- app.component.html -->
-<div class="container">
-  <div *ngIf="selectedOwner">
-    <p>ID: {{selectedOwner.id}} </p>
-    <p>FirstName: {{selectedOwner.firstName}} </p>
-    <p>FirstName: {{selectedOwner.lastName}} </p>
-    <app-pet-list [pets]="pets"></app-pet-list>
-
-    <form [formGroup]="petForm" (ngSubmit)="onSubmit()">
-      <div formArrayName="pets">
-        <div class="form-group" *ngFor="let petControl of controls; let i = index"   [formGroupName]="i">
-
-
-          <mat-form-field>
-            <mat-label>Pet Name</mat-label>
-            <input matInput placeholder="Enter your pet name" formControlName="name">
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label>Breed</mat-label>
-            <input matInput placeholder="Enter your pet breed" formControlName="breed">
-          </mat-form-field>
-
-          <button type="button" (click)="onDeletePet(i)" > x</button>
+<mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile colspan="1" rowspan="2">
+        <div class="scrollable-content">
+            <div *ngIf="!owner">You have not selected owner</div>
+            <div *ngIf="owner">
+                <app-pet-list></app-pet-list>
+            </div>
         </div>
-        <button type="button" (click)="onAddPet()"> Add pet</button>
-        <button type="submit"> Save</button>
-      </div>
-    </form>
-  </div>
-  <p>Owner List</p>
-  <mat-list class="example-list" *ngFor="let owner of owners; let i =index">
-    <a mat-list-item (click)="onVewPet(i)">{{owner.firstName +"" + owner.lastName}}</a>
-  </mat-list>
-
-</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <button mat-button (click)="addPet()" *ngIf="owner">Add pet</button>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div class="scrollable-content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

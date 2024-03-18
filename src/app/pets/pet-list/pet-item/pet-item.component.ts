@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Pet } from '../../pet.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PetService } from '../../pet.service';
 
 @Component({
@@ -8,13 +9,18 @@ import { PetService } from '../../pet.service';
   styleUrl: './pet-item.component.css'
 })
 export class PetItemComponent {
+
+
   @Input() pet: Pet;
   @Input() index: number;
-  constructor(private petService:PetService){
-
+  constructor(private router: Router, private route: ActivatedRoute,private petService:PetService) {
   }
-  onDeletePet(index:number) {
-    console.log('what is this' +index);
-    this.petService.deletePet(index);
+
+  onDelete() {
+    this.petService.deletePet(this.index);
+  }
+  
+  onEditPet(index: number) {
+    this.router.navigate([index, 'edit'], { relativeTo: this.route });
   }
 }

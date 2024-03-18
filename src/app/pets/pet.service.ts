@@ -1,64 +1,64 @@
-import { Subject } from "rxjs";
-import { Pet } from "./pet.model";
-import { PetStorageService } from "../shared/pet-storage.service";
-import { Injectable, OnInit, ViewChild } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Owner } from "../owner/owner.model";
-import { NgForm } from "@angular/forms";
-@Injectable()
-export class PetService implements OnInit {
+import { Pet } from "./pet.model";
+import { Subject } from "rxjs";
+import { OwnerService } from "../owner/owner.service";
+import { DataStorageService } from "../shared/data-storage.service";
 
+@Injectable({
+    providedIn: 'root'
+})
+export class PetService {
     petsChanged = new Subject<Pet[]>();
-    pets: Pet[] = [];
+    pets: Pet[];
     owner: Owner;
-
-    constructor(private petStorageService: PetStorageService) { }
-    ngOnInit(): void {
-
+    constructor(private ownerService: OwnerService, private dataStorageService: DataStorageService) { }
+    
+    setPets() {
+        this.dataStorageService.fetchOwnerPets(this.owner.id).subscribe((pets: Pet[]) => {
+            this.pets = pets;
+            this.petsChanged.next(this.pets.slice());
+        }, error => {
+            this.pets = [];
+        });
     }
-    // fetchOwnerPets() {
-    //     this.petStorageService.fetchOwnerPets(this.owner.id).subscribe((pets: Pet[]) => {
-    //         this.pets = pets;
-
-    //     });
-    // }
-    setOwner(owner: Owner) {
-
-        this.owner = owner
+    
+    setOwner(index: number) {
+        this.owner = this.ownerService.getOwner(index);
     }
+    
+    getOwner(){
+        return this.owner;
+    }
+    
+    getPets() {
+        return this.pets.slice();
+    }
+   
+    addPet(pet: Pet) {
+        this.dataStorageService.storePet(pet, this.owner.id).subscribe((myPet: Pet) => {
+            this.pets.push(myPet);
+            this.petsChanged.next(this.pets.slice());
+        });
+    }
+    
+    getPet(index: number) {
+        return this.pets[index]
+    }
+    
+    updatePet(index: number, pet: Pet) {
+        this.dataStorageService.putPet(this.pets[index]).subscribe(() => {
+            const date = new Date();
+            pet.dateModified = new Date().toLocaleDateString('sv');
+            this.pets[index] = pet;
+            this.petsChanged.next(this.pets.slice());
+        });
+    }
+   
     deletePet(index: number) {
-
-        this.petStorageService.deletePet(this.pets[index].id).subscribe((response) => {
-            //here got problem  
+        this.dataStorageService.removePet(this.pets[index].id).subscribe(() => {
             this.pets.splice(index, 1);
             this.petsChanged.next(this.pets.slice());
         });
-    }
-    getOwner() {
-        return this.owner;
-    }
-    getPets() {
-        return this.pets.slice();
-
-    }
-    fetchOwnerPets() {
-
-        this.petStorageService.fetchOwnerPets(this.owner.id).subscribe((pets: Pet[]) => {
-            this.pets = pets;
-            this.petsChanged.next(this.pets.slice());
-        });
-
-    }
-    storePet(pet: Pet, id: number) {
-        console.log(this.pets);
-        this.petStorageService.storePet(pet, id).subscribe(() => {
-
-
-        })
-        this.pets.push(pet);
-        this.petsChanged.next(this.pets.slice());
-    }
-    addOwner(pets: Pet) {
-        this.pets.push(pets);
-        this.petsChanged.next(this.pets.slice());
     }
 }

@@ -1,13 +1,10 @@
-import { Owner } from '../owner/owner.model'
+
 export class Pet {
 
-
+    public dateCreated;
+    public dateModified;
     constructor(
         public id: number,
         public name: string,
-        public owner: Owner,
-        public breed: string
-    ) {
-
-    }
+        public breed: string) { }
 }

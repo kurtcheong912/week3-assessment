@@ -1,16 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { OwnerStorageService } from '../shared/owner-storage.service';
+import { Component } from '@angular/core';
+
+import { OwnerService } from '../owner/owner.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit {
-constructor(private ownerStorageService: OwnerStorageService){
-
-}
-ngOnInit(): void {
-    // this.ownerStorageService.fetchOwners();
-}
+export class HeaderComponent {
+  constructor(private ownerService: OwnerService) {
+  }
 }

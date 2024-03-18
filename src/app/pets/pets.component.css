@@ -1,26 +1,8 @@
-/* styles.css or styles.scss */
-.example-form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Align items to the start (left) */
-    width: 600px; /* Set a fixed width for the form */
+.scrollable-content {
+    max-height: 100%; 
+    overflow-y: auto;
   }
-  
-  .mat-form-field {
-    width: 100%; /* Set the width of form fields to 100% */
-    margin-bottom: 15px; /* Add some bottom margin between form fields */
+  .my-content {
+    max-height: 200%;
+    overflow-y: auto;
   }
-  
-  button {
-    margin-top: 15px; /* Add some top margin above the submit button */
-  }
-  .example-list a {
-    text-decoration: none; /* Remove default underline */
-    color: #007bff; /* Set link color */
-  }
-  
-  .example-list a:hover {
-    text-decoration: underline; /* Add underline on hover */
-    color: #0056b3; /* Change link color on hover */
-  }
-  

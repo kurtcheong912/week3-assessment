@@ -1,34 +1,26 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Owner } from './owner.model';
-import { OwnerService } from './owner.service';
-import { OwnerStorageService } from '../shared/owner-storage.service';
-import { PetService } from '../pets/pet.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-owner',
   templateUrl: './owner.component.html',
   styleUrl: './owner.component.css'
 })
-export class OwnerComponent implements OnInit {
-  @ViewChild('ownerForm') ownerForm: NgForm
-  newOwner: Owner;
+export class OwnerComponent {
 
-  constructor(private ownerService: OwnerService, private ownerStorageService: OwnerStorageService, private petService: PetService) { }
-  ngOnInit(): void {
-    this.ownerStorageService.fetchOwners().subscribe(
-      (owners: Owner[]) => {
-        this.ownerService.setOwners(owners);
-      }
-    );
+  owners: Owner[];
+  private isChangedOwner: Subscription;
+  isAdding = false;
+  constructor(private router: Router, private route: ActivatedRoute,) {
   }
-  onSubmit() {
-    let addedOwnerId: number;
-    this.newOwner = new Owner(this.ownerForm.value.firstName, this.ownerForm.value.lastName);
-    this.ownerService.addOwner(this.newOwner);
-    this.ownerForm.reset();
-
-
+  addingOwner(event: Event) {
+    this.isAdding = false;
+  }
+  addOwner() {
+    this.isAdding = true;
+    this.router.navigate(['add'], { relativeTo: this.route });
   }
 
 }
