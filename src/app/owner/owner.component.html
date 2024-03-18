@@ -1,0 +1,15 @@
+<mat-grid-list cols="2">
+    <mat-grid-tile>
+        <div class="scrollable-content">
+            <app-owner-list></app-owner-list>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div *ngIf="!isAdding">
+            <button mat-button (click)="addOwner()">Add owner</button>
+        </div>
+        <div class="scrollable-content">
+            <router-outlet (adding)="addingOwner($event)"></router-outlet>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

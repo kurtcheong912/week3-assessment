@@ -1,0 +1,14 @@
+<mat-card class="scrollable-content" style="margin-bottom: 20px; width: 400px;height: 100%; overflow-y: auto;">
+    <div (click)="onEditPet(index)"> <mat-card-header>
+            <mat-card-title-group>
+                <mat-card-title>Pet Name:{{ pet.name }}</mat-card-title>
+                <mat-card-subtitle>Pet Breed: {{ pet.breed }}</mat-card-subtitle>
+                <mat-card-subtitle>Date Created: {{ pet.dateCreated }}</mat-card-subtitle>
+                <mat-card-subtitle>Date Modified: {{ pet.dateModified }}</mat-card-subtitle>
+            </mat-card-title-group>
+        </mat-card-header>
+    </div>
+    <mat-card-actions align="end">
+        <button mat-button type="button" (click)="onDelete()">Delete</button>
+    </mat-card-actions>
+</mat-card>

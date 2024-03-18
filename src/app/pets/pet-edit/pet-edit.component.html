@@ -1,0 +1,20 @@
+<h3>Edit Pet</h3>
+<form [formGroup]="petForm" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Pet Name</mat-label>
+        <input matInput placeholder="Enter pet name" formControlName="name" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>Pet Breed</mat-label>
+        <input matInput placeholder="Enter pet breed" formControlName="breed" required>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Update</button>
+      <button mat-raised-button color="primary" type="button" (click)="onDelete()">Delete</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

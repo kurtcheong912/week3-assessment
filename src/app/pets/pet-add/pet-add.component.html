@@ -1,0 +1,17 @@
+<form [formGroup]="petForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="pets">
+    <div class="form-group" *ngFor="let petControl of controls; let i = index" [formGroupName]="i">
+      <mat-form-field>
+        <mat-label>Pet Name</mat-label>
+        <input matInput placeholder="Enter your pet name" formControlName="name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Breed</mat-label>
+        <input matInput placeholder="Enter your pet breed" formControlName="breed">
+      </mat-form-field>
+      <button type="button" (click)="onDeletePet(i)"> x</button>
+    </div>
+    <button  mat-raised-button color="primary" type="button" (click)="onAddPet()"> Add pet</button>
+    <button  mat-raised-button color="primary" type="submit"> Save</button>
+  </div>
+</form>

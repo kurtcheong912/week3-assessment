@@ -1,0 +1,2 @@
+<div *ngIf="!pets">Owner currently has no pets</div>
+<app-pet-item *ngFor="let pet of pets; let i=index;" [pet]="pet" [index]="i"></app-pet-item>
